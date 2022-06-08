@@ -1,14 +1,6 @@
 let socket = io("ws://127.0.0.1:5000")
 const API_URL = "http://127.0.0.1:8000/api/status";
 
-socket.on('connect', function(){
-  console.log('Conected')
-})
-
-socket.on('disconnect', function(){
-  console.log('Disconnect')
-})
-
 
 function get_status(topic,socket_to_emit){
 
@@ -93,3 +85,10 @@ function action_livingroom(action){
     
 
 
+socket.on('connect', function(){
+  console.log('Conected')
+})
+
+socket.on('disconnect', function(){
+  console.log('Disconnect')
+})

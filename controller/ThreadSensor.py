@@ -40,23 +40,18 @@ class ThreadSensor():
 
         print("---> Iniciando hilos ... <----")
 
-        for url_topic in self.status:
-            try:
-                requests.post(api_url,
-                data = json.dumps(
-                {
-                    "topic": url_topic, 
-                    "status": self.status[str(url_topic)]
-                }))
-            except:
-                print("Los datos ya se han creado")
-
-                #requests.post(api_url+'/status/'+url_topic,
-                #{
-                #    "topic": url_topic, 
-                #    "status": self.status[str(url_topic)]
-                #})
-
+        #OCUPAR SOLO LA PRIMERA VEZ PARA RELLENAR LA TABLA EN LA BASE DE DATOS
+        
+        #for url_topic in self.status:
+        #    try:
+        #        requests.post(api_url,
+        #        data = json.dumps(
+        #        {
+        #            "topic": url_topic, 
+        #            "status": self.status[str(url_topic)]
+        #        }))
+        #    except:
+        #        print("Los datos ya se han creado")
             
         if topic == "home" or topic == "home/temperature"  or topic == "home/temperature/room1":
             self.status["home/temperature/room1"] = action
