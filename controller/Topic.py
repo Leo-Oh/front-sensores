@@ -12,7 +12,7 @@ broker="34.94.79.113"
 #broker="127.0.0.1"
 port= 1884
 #api_url = "http://127.0.0.1:8000/api/log"
-api_url = "http://34.94.79.113:9095//api/log"
+api_url = "http://34.94.79.113:9095/api/log"
 
 now = datetime.now()
 

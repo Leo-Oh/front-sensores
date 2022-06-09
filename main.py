@@ -196,4 +196,4 @@ def home_air_livingroom(msg):
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port="9096")
+    app.run(host="0.0.0.0", port="9096", debug=True)

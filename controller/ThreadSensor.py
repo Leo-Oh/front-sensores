@@ -35,22 +35,22 @@ class ThreadSensor():
     
     def controller_thread_all_sensors(self,topic,action):
         cores = os.cpu_count()
-        api_url = "http://127.0.0.1:8000/api/status"
+        api_url = "http://34.94.79.113:9095/api/status"
 
         print("---> Iniciando hilos ... <----")
 
         #OCUPAR SOLO LA PRIMERA VEZ PARA RELLENAR LA TABLA EN LA BASE DE DATOS
         
-        #for url_topic in self.status:
-        #    try:
-        #        requests.post(api_url,
-        #        data = json.dumps(
-        #        {
-        #            "topic": url_topic, 
-        #            "status": self.status[str(url_topic)]
-        #        }))
-        #    except:
-        #        print("Los datos ya se han creado")
+        for url_topic in self.status:
+            try:
+                requests.post(api_url,
+                data = json.dumps(
+                {
+                    "topic": url_topic, 
+                    "status": self.status[str(url_topic)]
+                }))
+            except:
+                print("Los datos ya se han creado")
             
         if topic == "home" or topic == "home/temperature"  or topic == "home/temperature/room1":
             self.status["home/temperature/room1"] = action
