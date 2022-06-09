@@ -44,7 +44,7 @@ headers: {
   console.error("Error:", error);
 })
 .then((response) => {
-    console.log(response.topic);
+    //console.log(response.topic);
     console.log("Estado del sensor actualizado");
   
 });

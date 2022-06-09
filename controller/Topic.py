@@ -4,11 +4,16 @@ import paho.mqtt.client as paho
 import sys
 from sensor import Sensor
 import time
-
+import requests
+import json
+from datetime import datetime
 
 broker="34.94.79.113"
 #broker="127.0.0.1"
 port= 1884
+api_url = "http://127.0.0.1:8000/api/log"
+
+now = datetime.now()
 
 def on_publish(client,userdata,result):            
     print("Published ->",client._client_id,"\n")
@@ -20,14 +25,30 @@ def temperature_room1(accion = 0):
     temperature= paho.Client("Temperature-room1")                       
     temperature.on_publish = on_publish
     temperature.connect(broker,port)
+    topic = "home/temperature/room1"
 
     if(accion == 1):
         while True:
-            temperature.publish("home/temperature/room1", Sensor.Sensor.generate_value(0.01,0.99,30.01,39.99))
+            payload = Sensor.Sensor.generate_value(0.01,0.99,30.01,39.99)
+            fecha = '{}-{}-{}'.format(now.year,now.month,now.day) 
+            hora  = '{}:{}:{}'.format(now.hour,now.minute,now.second)
+            print("payload: ", payload ,"fecha: ", fecha,"hora", hora )
+
+            requests.post("http://127.0.0.1:8000/api/log",
+                data = json.dumps(
+                 {
+                    "topic": topic,
+                    "value" : payload,
+                    "date" : fecha,
+                    "time" : hora,
+                }))
+            temperature.publish(topic, payload)
+
+
             time.sleep(5)
     if(accion == 0):
         while True:
-            temperature.publish("home/temperature/room1", "--" )
+            temperature.publish(topic, "--" )
             time.sleep(5)
 
 
@@ -37,13 +58,29 @@ def temperature_room2(accion = 0):
     temperature.on_publish = on_publish 
     temperature.connect(broker,port)
 
+    topic = "home/temperature/room2"
+
     if(accion == 1):
         while True:
-            temperature.publish("home/temperature/room2", Sensor.Sensor.generate_value(0.01,0.99,30.01,39.99))
+            payload = Sensor.Sensor.generate_value(0.01,0.99,30.01,39.99)
+           
+            fecha = '{}-{}-{}'.format(now.year,now.month,now.day) 
+            hora  = '{}:{}:{}'.format(now.hour,now.minute,now.second)
+
+            requests.post(api_url,
+                data = json.dumps(
+                 {
+                    "topic": topic,
+                    "value" : payload,
+                    "date" : fecha,
+                    "time" : hora,
+                }))
+            temperature.publish(topic, payload)
             time.sleep(5)
+
     if(accion == 0):
         while True:
-            temperature.publish("home/temperature/room2", "--")
+            temperature.publish(topic, "--")
             time.sleep(5)
 
 def temperature_bathroom(accion = 0):
@@ -52,13 +89,29 @@ def temperature_bathroom(accion = 0):
     temperature.on_publish = on_publish                         
     temperature.connect(broker,port)
 
+    topic = "home/temperature/bathroom"
+
     if(accion == 1):
         while True:
-            temperature.publish("home/temperature/bathroom", Sensor.Sensor.generate_value(0.01,0.99,30.01,39.99))
+            payload = Sensor.Sensor.generate_value(0.01,0.99,30.01,39.99)
+           
+            fecha = '{}-{}-{}'.format(now.year,now.month,now.day) 
+            hora  = '{}:{}:{}'.format(now.hour,now.minute,now.second)
+
+            requests.post(api_url,
+                data = json.dumps(
+                 {
+                    "topic": topic,
+                    "value" : payload,
+                    "date" : fecha,
+                    "time" : hora,
+                }))
+            temperature.publish(topic, payload)
             time.sleep(5)
+
     if(accion == 0):
         while True:
-            temperature.publish("home/temperature/bathroom", "--")
+            temperature.publish(topic, "--")
             time.sleep(5)
 
 
@@ -68,13 +121,28 @@ def temperature_kitchen(accion = 0):
     temperature.on_publish = on_publish                     
     temperature.connect(broker,port)
 
+    topic = "home/temperature/kitchen"
+
     if(accion == 1):
         while True:
-            temperature.publish("home/temperature/kitchen", Sensor.Sensor.generate_value(0.01,0.99,30.01,39.99))
+            payload = Sensor.Sensor.generate_value(0.01,0.99,30.01,39.99)
+           
+            fecha = '{}-{}-{}'.format(now.year,now.month,now.day) 
+            hora  = '{}:{}:{}'.format(now.hour,now.minute,now.second)
+
+            requests.post(api_url,
+                data = json.dumps(
+                 {
+                    "topic": topic,
+                    "value" : payload,
+                    "date" : fecha,
+                    "time" : hora,
+                }))
+            temperature.publish(topic, payload)
             time.sleep(5)
     if(accion == 0):
         while True:
-            temperature.publish("home/temperature/kitchen", "--")
+            temperature.publish(topic, "--")
             time.sleep(5)
 
 def temperature_livingroom(accion = 0):
@@ -83,15 +151,29 @@ def temperature_livingroom(accion = 0):
     temperature.on_publish = on_publish                       
     temperature.connect(broker,port)
 
+    topic = "home/temperature/livingroom"
+
     if(accion == 1):
         while True:
-            temperature.publish("home/temperature/livingroom", Sensor.Sensor.generate_value(0.01,0.99,30.01,39.99))
+            payload = Sensor.Sensor.generate_value(0.01,0.99,30.01,39.99)
+           
+            fecha = '{}-{}-{}'.format(now.year,now.month,now.day) 
+            hora  = '{}:{}:{}'.format(now.hour,now.minute,now.second)
+
+            requests.post(api_url,
+                data = json.dumps(
+                 {
+                    "topic": topic,
+                    "value" : payload,
+                    "date" : fecha,
+                    "time" : hora,
+                }))
+            temperature.publish(topic, payload)
             time.sleep(5)
     if(accion == 0):
         while True:
-            temperature.publish("home/temperature/livingroom", "--")
+            temperature.publish(topic, "--")
             time.sleep(5)
-
 
 def temperature_garden(accion = 0):
 
@@ -99,14 +181,28 @@ def temperature_garden(accion = 0):
     temperature.on_publish = on_publish                
     temperature.connect(broker,port)
 
+    topic = "home/temperature/garden"
+
     if(accion == 1):
         while True:
-            temperature.publish("home/temperature/garden", Sensor.Sensor.generate_value(0.01,0.99,30.01,39.99))
-            time.sleep(5)
+            payload = Sensor.Sensor.generate_value(0.01,0.99,30.01,39.99)
+           
+            fecha = '{}-{}-{}'.format(now.year,now.month,now.day) 
+            hora  = '{}:{}:{}'.format(now.hour,now.minute,now.second)
 
+            requests.post(api_url,
+                data = json.dumps(
+                 {
+                    "topic": topic,
+                    "value" : payload,
+                    "date" : fecha,
+                    "time" : hora,
+                }))
+            temperature.publish(topic, payload)
+            time.sleep(5)
     if(accion == 0):
         while True:
-            temperature.publish("home/temperature/garden", "--")
+            temperature.publish(topic, "--")
             time.sleep(5)
 
 # Humidity
@@ -116,14 +212,28 @@ def humidity_room1(accion = 0):
     humidity.on_publish = on_publish
     humidity.connect(broker,port)
 
+    topic = "home/humidity/room1"
+
     if(accion == 1):
         while True:
-            humidity.publish("home/humidity/room1", Sensor.Sensor.generate_value(0.01,1.99,75,99.99))
-            time.sleep(5)
+            payload = Sensor.Sensor.generate_value(0.01,1.99,75,99.99)
+           
+            fecha = '{}-{}-{}'.format(now.year,now.month,now.day) 
+            hora  = '{}:{}:{}'.format(now.hour,now.minute,now.second)
 
+            requests.post(api_url,
+                data = json.dumps(
+                 {
+                    "topic": topic,
+                    "value" : payload,
+                    "date" : fecha,
+                    "time" : hora,
+                }))
+            humidity.publish(topic, payload)
+            time.sleep(5)
     if(accion == 0):
         while True:
-            humidity.publish("home/humidity/room1", "--")
+            humidity.publish(topic, "--")
             time.sleep(5)
 
 
@@ -133,14 +243,28 @@ def humidity_room2(accion = 0):
     humidity.on_publish = on_publish 
     humidity.connect(broker,port)
 
+    topic = "home/humidity/room2"
+
     if(accion == 1):
         while True:
-            humidity.publish("home/humidity/room2", Sensor.Sensor.generate_value(0.01,1.99,75,99.99))
-            time.sleep(5)
+            payload = Sensor.Sensor.generate_value(0.01,1.99,75,99.99)
+           
+            fecha = '{}-{}-{}'.format(now.year,now.month,now.day) 
+            hora  = '{}:{}:{}'.format(now.hour,now.minute,now.second)
 
+            requests.post(api_url,
+                data = json.dumps(
+                 {
+                    "topic": topic,
+                    "value" : payload,
+                    "date" : fecha,
+                    "time" : hora,
+                }))
+            humidity.publish(topic, payload)
+            time.sleep(5)
     if(accion == 0):
         while True:
-            humidity.publish("home/humidity/room2", "--")
+            humidity.publish(topic, "--")
             time.sleep(5)
 
 def humidity_bathroom(accion = 0):
@@ -149,14 +273,28 @@ def humidity_bathroom(accion = 0):
     humidity.on_publish = on_publish                         
     humidity.connect(broker,port)
 
+    topic = "home/humidity/bathroom"
+
     if(accion == 1):
         while True:
-            humidity.publish("home/humidity/bathroom", Sensor.Sensor.generate_value(0.01,1.99,75,99.99))
-            time.sleep(5)
+            payload = Sensor.Sensor.generate_value(0.01,1.99,75,99.99)
+           
+            fecha = '{}-{}-{}'.format(now.year,now.month,now.day) 
+            hora  = '{}:{}:{}'.format(now.hour,now.minute,now.second)
 
+            requests.post(api_url,
+                data = json.dumps(
+                 {
+                    "topic": topic,
+                    "value" : payload,
+                    "date" : fecha,
+                    "time" : hora,
+                }))
+            humidity.publish(topic, payload)
+            time.sleep(5)
     if(accion == 0):
         while True:
-            humidity.publish("home/humidity/bathroom", "--")
+            humidity.publish(topic, "--")
             time.sleep(5)
 
 
@@ -166,14 +304,28 @@ def humidity_kitchen(accion = 0):
     humidity.on_publish = on_publish                     
     humidity.connect(broker,port)
 
+    topic = "home/humidity/kitchen"
+
     if(accion == 1):
         while True:
-            humidity.publish("home/humidity/kitchen", Sensor.Sensor.generate_value(0.01,1.99,75,99.99))
-            time.sleep(5)
+            payload = Sensor.Sensor.generate_value(0.01,1.99,75,99.99)
+           
+            fecha = '{}-{}-{}'.format(now.year,now.month,now.day) 
+            hora  = '{}:{}:{}'.format(now.hour,now.minute,now.second)
 
+            requests.post(api_url,
+                data = json.dumps(
+                 {
+                    "topic": topic,
+                    "value" : payload,
+                    "date" : fecha,
+                    "time" : hora,
+                }))
+            humidity.publish(topic, payload)
+            time.sleep(5)
     if(accion == 0):
         while True:
-            humidity.publish("home/humidity/kitchen", "--")
+            humidity.publish(topic, "--")
             time.sleep(5)
 
 
@@ -183,14 +335,28 @@ def humidity_livingroom(accion = 0):
     humidity.on_publish = on_publish                       
     humidity.connect(broker,port)
 
+    topic = "home/humidity/livingroom"
+
     if(accion == 1):
         while True:
-            humidity.publish("home/humidity/livingroom", Sensor.Sensor.generate_value(0.01,1.99,75,99.99))
-            time.sleep(5)
+            payload = Sensor.Sensor.generate_value(0.01,1.99,75,99.99)
+           
+            fecha = '{}-{}-{}'.format(now.year,now.month,now.day) 
+            hora  = '{}:{}:{}'.format(now.hour,now.minute,now.second)
 
+            requests.post(api_url,
+                data = json.dumps(
+                 {
+                    "topic": topic,
+                    "value" : payload,
+                    "date" : fecha,
+                    "time" : hora,
+                }))
+            humidity.publish(topic, payload)
+            time.sleep(5)
     if(accion == 0):
         while True:
-            humidity.publish("home/humidity/livingroom", "--")
+            humidity.publish(topic, "--")
             time.sleep(5)
 
 
@@ -200,14 +366,28 @@ def humidity_garden(accion = 0):
     humidity.on_publish = on_publish                
     humidity.connect(broker,port)
 
+    topic = "home/humidity/garden"
+
     if(accion == 1):
         while True:
-            humidity.publish("home/humidity/garden", Sensor.Sensor.generate_value(0.01,1.99,75,99.99))
-            time.sleep(5)
+            payload = Sensor.Sensor.generate_value(0.01,1.99,75,99.99)
+           
+            fecha = '{}-{}-{}'.format(now.year,now.month,now.day) 
+            hora  = '{}:{}:{}'.format(now.hour,now.minute,now.second)
 
+            requests.post(api_url,
+                data = json.dumps(
+                 {
+                    "topic": topic,
+                    "value" : payload,
+                    "date" : fecha,
+                    "time" : hora,
+                }))
+            humidity.publish(topic, payload)
+            time.sleep(5)
     if(accion == 0):
         while True:
-            humidity.publish("home/humidity/garden", "--")
+            humidity.publish(topic, "--")
             time.sleep(5)
 
 
@@ -218,13 +398,28 @@ def air_room1(accion = 0):
     air.on_publish = on_publish
     air.connect(broker,port)
 
+    topic = "home/air/room1"
+
     if(accion == 1):
         while True:
-            air.publish("home/air/room1", Sensor.Sensor.generate_value(0.01,0.99,400,500))
+            payload = Sensor.Sensor.generate_value(0.01,0.99,400,500)
+           
+            fecha = '{}-{}-{}'.format(now.year,now.month,now.day) 
+            hora  = '{}:{}:{}'.format(now.hour,now.minute,now.second)
+
+            requests.post(api_url,
+                data = json.dumps(
+                 {
+                    "topic": topic,
+                    "value" : payload,
+                    "date" : fecha,
+                    "time" : hora,
+                }))
+            air.publish(topic, payload)
             time.sleep(5)
     if(accion == 0):
         while True:
-            air.publish("home/air/room1", "--")
+            air.publish(topic, "--")
             time.sleep(5)
 
 
@@ -234,13 +429,28 @@ def air_room2(accion = 0):
     air.on_publish = on_publish 
     air.connect(broker,port)
 
+    topic = "home/air/room2"
+
     if(accion == 1):
         while True:
-            air.publish("home/air/room2", Sensor.Sensor.generate_value(0.01,0.99,400,500))
+            payload = Sensor.Sensor.generate_value(0.01,0.99,400,500)
+           
+            fecha = '{}-{}-{}'.format(now.year,now.month,now.day) 
+            hora  = '{}:{}:{}'.format(now.hour,now.minute,now.second)
+
+            requests.post(api_url,
+                data = json.dumps(
+                 {
+                    "topic": topic,
+                    "value" : payload,
+                    "date" : fecha,
+                    "time" : hora,
+                }))
+            air.publish(topic, payload)
             time.sleep(5)
     if(accion == 0):
         while True:
-            air.publish("home/air/room2", "--")
+            air.publish(topic, "--")
             time.sleep(5)
 
 def air_bathroom(accion = 0):
@@ -249,13 +459,28 @@ def air_bathroom(accion = 0):
     air.on_publish = on_publish                         
     air.connect(broker,port)
 
+    topic = "home/air/bathroom"
+
     if(accion == 1):
         while True:
-            air.publish("home/air/bathroom", Sensor.Sensor.generate_value(0.01,0.99,400,500))
+            payload = Sensor.Sensor.generate_value(0.01,0.99,400,500)
+           
+            fecha = '{}-{}-{}'.format(now.year,now.month,now.day) 
+            hora  = '{}:{}:{}'.format(now.hour,now.minute,now.second)
+
+            requests.post(api_url,
+                data = json.dumps(
+                 {
+                    "topic": topic,
+                    "value" : payload,
+                    "date" : fecha,
+                    "time" : hora,
+                }))
+            air.publish(topic, payload)
             time.sleep(5)
     if(accion == 0):
         while True:
-            air.publish("home/air/bathroom", "--")
+            air.publish(topic, "--")
             time.sleep(5)
 
 
@@ -265,13 +490,28 @@ def air_kitchen(accion = 0):
     air.on_publish = on_publish                     
     air.connect(broker,port)
 
+    topic = "home/air/kitchen"
+
     if(accion == 1):
         while True:
-            air.publish("home/air/kitchen", Sensor.Sensor.generate_value(0.01,0.99,400,500))
+            payload = Sensor.Sensor.generate_value(0.01,0.99,400,500)
+           
+            fecha = '{}-{}-{}'.format(now.year,now.month,now.day) 
+            hora  = '{}:{}:{}'.format(now.hour,now.minute,now.second)
+
+            requests.post(api_url,
+                data = json.dumps(
+                 {
+                    "topic": topic,
+                    "value" : payload,
+                    "date" : fecha,
+                    "time" : hora,
+                }))
+            air.publish(topic, payload)
             time.sleep(5)
     if(accion == 0):
         while True:
-            air.publish("home/air/kitchen", "--")
+            air.publish(topic, "--")
             time.sleep(5)
 
 def air_livingroom(accion = 0):
@@ -280,13 +520,28 @@ def air_livingroom(accion = 0):
     air.on_publish = on_publish                       
     air.connect(broker,port)
 
+    topic = "home/air/livingroom"
+
     if(accion == 1):
         while True:
-            air.publish("home/air/livingroom", Sensor.Sensor.generate_value(0.01,0.99,400,500))
+            payload = Sensor.Sensor.generate_value(0.01,0.99,400,500)
+           
+            fecha = '{}-{}-{}'.format(now.year,now.month,now.day) 
+            hora  = '{}:{}:{}'.format(now.hour,now.minute,now.second)
+
+            requests.post(api_url,
+                data = json.dumps(
+                 {
+                    "topic": topic,
+                    "value" : payload,
+                    "date" : fecha,
+                    "time" : hora,
+                }))
+            air.publish(topic, payload)
             time.sleep(5)
     if(accion == 0):
         while True:
-            air.publish("home/air/livingroom", "--")
+            air.publish(topic, "--")
             time.sleep(5)
 
 
@@ -296,13 +551,26 @@ def air_garden(accion = 0):
     air.on_publish = on_publish                
     air.connect(broker,port)
 
+    topic = "home/air/garden"
+
     if(accion == 1):
         while True:
-            air.publish("home/air/garden", Sensor.Sensor.generate_value(0.01,0.99,400,500))
-            time.sleep(5)
+            payload = Sensor.Sensor.generate_value(0.01,0.99,400,500)
+           
+            fecha = '{}-{}-{}'.format(now.year,now.month,now.day) 
+            hora  = '{}:{}:{}'.format(now.hour,now.minute,now.second)
 
+            requests.post(api_url,
+                data = json.dumps(
+                 {
+                    "topic": topic,
+                    "value" : payload,
+                    "date" : fecha,
+                    "time" : hora,
+                }))
+            air.publish(topic, payload)
+            time.sleep(5)
     if(accion == 0):
         while True:
-            air.publish("home/air/garden", "--")
+            air.publish(topic, "--")
             time.sleep(5)
-
