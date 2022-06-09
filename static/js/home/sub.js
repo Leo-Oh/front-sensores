@@ -54,7 +54,11 @@ let temperatura_to_keep_livingroom = 30;
 let total_active = 0;
 let average_temperature = 0;
 
+
+
+
 /*Callback for incoming message processing */
+let i = 0;
 function MessageArrived(message) {
 
 	fetch('http://34.94.79.113:9095/api/status')
@@ -158,23 +162,32 @@ function MessageArrived(message) {
 
 	try {
 		//console.log("total",average_temperature);
-		average_temperature /= 6;
+		
 	} catch (e) {
 		console.log(e);
 	}
 
-	console.log(average_temperature);
-	if (average_temperature != "--") {
-		const value_average = document.getElementById('averageTemperatureHome');
-		value_average.innerHTML = `${average_temperature.toFixed(2)}°C`;
-	} else {
-		const value_average = document.getElementById('averageTemperatureHome');
-		value_average.innerHTML = "--";
+
+	if (i ==6){
+		console.log(average_temperature);
+	
+		if (average_temperature != 0) {
+			console.log("se ejecuta if")
+			average_temperature /= 6
+			const value_average = document.getElementById('averageTemperatureHome');
+			value_average.innerHTML = `${average_temperature.toFixed(2)}°C`;
+		} else {
+			const value_average = document.getElementById('averageTemperatureHome');
+			value_average.innerHTML = "--";
+		}
+		average_temperature = 0
+		i = 0
 	}
-
-
-	average_temperature = 0;
+	else{
+		i+=1
+	}
 }
+
 
 
 
