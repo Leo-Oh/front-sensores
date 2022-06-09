@@ -1,6 +1,5 @@
 # coding=utf-8
 
-from numpy import NaN
 import paho.mqtt.client as paho
 import sys
 from sensor import Sensor

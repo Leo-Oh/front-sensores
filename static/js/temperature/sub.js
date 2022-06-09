@@ -44,58 +44,144 @@ function ConnectionLost(res) {
 
 /*Callback for incoming message processing */
 function MessageArrived(message) {
+	var hoy = new Date();
 	console.log(message.destinationName + " : " + message.payloadString);
-	
+
 	if (message.destinationName == "home/temperature/room1") {
 		const value_on_table = document.getElementById('temperature_value_room1');
-		if( parseFloat( message.payloadString) ){
+		if (parseFloat(message.payloadString)) {
 			value_on_table.innerHTML = `${message.payloadString}°C`;
-		}else{
+
+			fetch('http://127.0.0.1:8000/api/log', {
+				method: 'POST',
+				body: JSON.stringify({
+					topic: message.destinationName,
+					value: message.payloadString,
+					date: hoy.getFullYear() + '-' + (hoy.getMonth() + 1) +'-'+ hoy.getDate(),
+					time: hoy.getHours() + ':' + hoy.getMinutes()
+				}),
+				headers: {
+					"Content-type": "application/json"
+				}
+			})
+				.then(response => response)
+				.then(json => console.log(json))
+		} else {
 			value_on_table.innerHTML = message.payloadString;
-		}	
+		}
 	}
 
 	if (message.destinationName == "home/temperature/room2") {
 		const value_on_table = document.getElementById('temperature_value_room2');
-		if( parseFloat( message.payloadString) ){
+		if (parseFloat(message.payloadString)) {
 			value_on_table.innerHTML = `${message.payloadString}°C`;
-		}else{
+			fetch('http://127.0.0.1:8000/api/log', {
+				method: 'POST',
+				body: JSON.stringify({
+					topic: message.destinationName,
+					value: message.payloadString,
+					date: hoy.getFullYear() + '-' + (hoy.getMonth() + 1) +'-'+ hoy.getDate(),
+					time: hoy.getHours() + ':' + hoy.getMinutes()
+				}),
+				headers: {
+					"Content-type": "application/json"
+				}
+			})
+				.then(response => response)
+				.then(json => console.log(json))
+		} else {
 			value_on_table.innerHTML = message.payloadString;
 		}
 	}
 
 	if (message.destinationName == "home/temperature/bathroom") {
 		const value_on_table = document.getElementById('temperature_value_bathroom');
-		if( parseFloat( message.payloadString) ){
+		if (parseFloat(message.payloadString)) {
 			value_on_table.innerHTML = `${message.payloadString}°C`;
-		}else{
+			fetch('http://127.0.0.1:8000/api/log', {
+				method: 'POST',
+				body: JSON.stringify({
+					topic: message.destinationName,
+					value: message.payloadString,
+					date: hoy.getFullYear() + '-' + (hoy.getMonth() + 1) +'-'+ hoy.getDate(),
+					time: hoy.getHours() + ':' + hoy.getMinutes()
+				}),
+				headers: {
+					"Content-type": "application/json"
+				}
+			})
+				.then(response => response)
+				.then(json => console.log(json))
+		} else {
 			value_on_table.innerHTML = message.payloadString;
 		}
 	}
 
 	if (message.destinationName == "home/temperature/kitchen") {
 		const value_on_table = document.getElementById('temperature_value_kitchen');
-		if( parseFloat( message.payloadString) ){
+		if (parseFloat(message.payloadString)) {
 			value_on_table.innerHTML = `${message.payloadString}°C`;
-		}else{
+			fetch('http://127.0.0.1:8000/api/log', {
+				method: 'POST',
+				body: JSON.stringify({
+					topic: message.destinationName,
+					value: message.payloadString,
+					date: hoy.getFullYear() + '-' + (hoy.getMonth() + 1) +'-'+ hoy.getDate(),
+					time: hoy.getHours() + ':' + hoy.getMinutes()
+				}),
+				headers: {
+					"Content-type": "application/json"
+				}
+			})
+				.then(response => response)
+				.then(json => console.log(json))
+		} else {
 			value_on_table.innerHTML = message.payloadString;
 		}
 	}
 
 	if (message.destinationName == "home/temperature/garden") {
 		const value_on_table = document.getElementById('temperature_value_garden');
-		if( parseFloat( message.payloadString) ){
+		if (parseFloat(message.payloadString)) {
 			value_on_table.innerHTML = `${message.payloadString}°C`;
-		}else{
+			fetch('http://127.0.0.1:8000/api/log', {
+				method: 'POST',
+				body: JSON.stringify({
+					topic: message.destinationName,
+					value: message.payloadString,
+					date: hoy.getFullYear() + '-' + (hoy.getMonth() + 1) +'-'+ hoy.getDate(),
+					time: hoy.getHours() + ':' + hoy.getMinutes()
+				}),
+				headers: {
+					"Content-type": "application/json"
+				}
+			})
+				.then(response => response)
+				.then(json => console.log(json))
+		} else {
 			value_on_table.innerHTML = message.payloadString;
 		}
 	}
 
 	if (message.destinationName == "home/temperature/livingroom") {
 		const value_on_table = document.getElementById('temperature_value_livingroom');
-		if( parseFloat( message.payloadString) ){
+		if (parseFloat(message.payloadString)) {
 			value_on_table.innerHTML = `${message.payloadString}°C`;
-		}else{
+			fetch('http://127.0.0.1:8000/api/log', {
+				method: 'POST',
+				body: JSON.stringify({
+					topic: message.destinationName,
+					value: message.payloadString,
+					date: hoy.getFullYear() + '-' + (hoy.getMonth() + 1) +'-'+ hoy.getDate(),
+					time: hoy.getHours() + ':' + hoy.getMinutes()
+				}),
+				headers: {
+					"Content-type": "application/json"
+				}
+			})
+				.then(response => response)
+				.then(json => console.log(json))
+		} else {
 			value_on_table.innerHTML = message.payloadString;
 		}
 	}
