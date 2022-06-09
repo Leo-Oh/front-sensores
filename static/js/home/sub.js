@@ -54,12 +54,14 @@ let temperatura_to_keep_livingroom = 30;
 
 let total_active = 0;
 let average_temperature = 0;
+
 /*Callback for incoming message processing */
 function MessageArrived(message) {
 	console.log(message.destinationName + " : " + message.payloadString);
 
 	if (message.destinationName == "home/temperature/room1")
 		if (message.payloadString != "--" ) {
+			average_temperature += parseFloat(message.payloadString)
 			new_temperature = parseFloat(message.payloadString)
 			if ((new_temperature > (temp_before_act_temp_r1 + variation_to_change)) || (new_temperature < (temp_before_act_temp_r1 - variation_to_change)))
 				temp_before_act_temp_r1 = new_temperature;
@@ -84,6 +86,7 @@ function MessageArrived(message) {
 
 	if (message.destinationName == "home/temperature/room2")
 		if (message.payloadString != "--") {
+			average_temperature += parseFloat(message.payloadString)
 			new_temperature = parseFloat(message.payloadString)
 			if ((new_temperature > (temp_before_act_temp_r2 + variation_to_change)) || (new_temperature < (temp_before_act_temp_r2 - variation_to_change)))
 				temp_before_act_temp_r2 = new_temperature;
@@ -113,10 +116,11 @@ function MessageArrived(message) {
 		average_temperature += parseFloat(message.payloadString)
 
 	if (message.destinationName == "home/temperature/garden")
-		average_temperature += parseFloat(message.payloadString)
+	average_temperature += parseFloat(message.payloadString)
 
 	if (message.destinationName == "home/temperature/livingroom")
-		if (average_temperature != "--") {
+		if (message.payloadString != "--") {
+			average_temperature += parseFloat(message.payloadString)	
 			new_temperature = parseFloat(message.payloadString)
 			if ((new_temperature > (temp_before_act_temp_liv2 + variation_to_change)) || (new_temperature < (temp_before_act_temp_liv2 - variation_to_change)))
 				temp_before_act_temp_liv2 = new_temperature;
