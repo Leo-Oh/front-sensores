@@ -1,4 +1,4 @@
-let socket = io("ws://127.0.0.1:9096");
+let socket = io("ws://0.0.0.0:9096");
 
 socket.on('connect', function(){
   console.log('Conected')
