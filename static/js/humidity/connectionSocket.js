@@ -1,4 +1,5 @@
-let socket = io("ws://127.0.0.1:5000")
+let socket = io("ws://34.94.79.113:9096");
+
 const API_URL = "http://127.0.0.1:8000/api/status";
 
 

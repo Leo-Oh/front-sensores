@@ -11,7 +11,8 @@ from datetime import datetime
 broker="34.94.79.113"
 #broker="127.0.0.1"
 port= 1884
-api_url = "http://127.0.0.1:8000/api/log"
+#api_url = "http://127.0.0.1:8000/api/log"
+api_url = "http://34.94.79.113:9095//api/log"
 
 now = datetime.now()
 
@@ -34,7 +35,7 @@ def temperature_room1(accion = 0):
             hora  = '{}:{}:{}'.format(now.hour,now.minute,now.second)
             print("payload: ", payload ,"fecha: ", fecha,"hora", hora )
 
-            requests.post("http://127.0.0.1:8000/api/log",
+            requests.post(api_url,
                 data = json.dumps(
                  {
                     "topic": topic,

@@ -4,7 +4,7 @@ const btn_upate = document.getElementById('btn-upate')
 
 
 btn_upate.addEventListener('click', () => {
-  fetch('http://127.0.0.1:8000/api/logs')
+  fetch('http://34.94.79.113:9095/api/logs')
     .then(response => response.json())
     .then(json => {
       console.log(json)

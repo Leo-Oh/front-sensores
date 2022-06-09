@@ -49,7 +49,6 @@ let temp_before_act_temp_liv2 = 0;
 let temperatura_to_keep_room1 = 30;
 let temperatura_to_keep_room2 = 30;
 let temperatura_to_keep_kitchen = 20;
-
 let temperatura_to_keep_livingroom = 30;
 
 let total_active = 0;
@@ -57,11 +56,26 @@ let average_temperature = 0;
 
 /*Callback for incoming message processing */
 function MessageArrived(message) {
+
+	fetch('http://34.94.79.113:9095/api/status')
+    .then(response => response.json())
+    .then(json => {
+      console.log(json)
+      for (var index in json) {
+
+   		json[index].topic
+   		json[index].status
+
+        console.log(json[index].topic,json[index].status)
+      }
+    })
+
 	console.log(message.destinationName + " : " + message.payloadString);
 
 	if (message.destinationName == "home/temperature/room1")
 		if (message.payloadString != "--" ) {
 			average_temperature += parseFloat(message.payloadString)
+
 			new_temperature = parseFloat(message.payloadString)
 			if ((new_temperature > (temp_before_act_temp_r1 + variation_to_change)) || (new_temperature < (temp_before_act_temp_r1 - variation_to_change)))
 				temp_before_act_temp_r1 = new_temperature;

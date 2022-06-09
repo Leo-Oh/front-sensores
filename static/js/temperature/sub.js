@@ -52,20 +52,6 @@ function MessageArrived(message) {
 		if (parseFloat(message.payloadString)) {
 			value_on_table.innerHTML = `${message.payloadString}°C`;
 
-			fetch('http://127.0.0.1:8000/api/log', {
-				method: 'POST',
-				body: JSON.stringify({
-					topic: message.destinationName,
-					value: message.payloadString,
-					date: hoy.getFullYear() + '-' + (hoy.getMonth() + 1) +'-'+ hoy.getDate(),
-					time: hoy.getHours() + ':' + hoy.getMinutes()
-				}),
-				headers: {
-					"Content-type": "application/json"
-				}
-			})
-				.then(response => response)
-				.then(json => console.log(json))
 		} else {
 			value_on_table.innerHTML = message.payloadString;
 		}
@@ -75,20 +61,7 @@ function MessageArrived(message) {
 		const value_on_table = document.getElementById('temperature_value_room2');
 		if (parseFloat(message.payloadString)) {
 			value_on_table.innerHTML = `${message.payloadString}°C`;
-			fetch('http://127.0.0.1:8000/api/log', {
-				method: 'POST',
-				body: JSON.stringify({
-					topic: message.destinationName,
-					value: message.payloadString,
-					date: hoy.getFullYear() + '-' + (hoy.getMonth() + 1) +'-'+ hoy.getDate(),
-					time: hoy.getHours() + ':' + hoy.getMinutes()
-				}),
-				headers: {
-					"Content-type": "application/json"
-				}
-			})
-				.then(response => response)
-				.then(json => console.log(json))
+			
 		} else {
 			value_on_table.innerHTML = message.payloadString;
 		}
@@ -98,20 +71,7 @@ function MessageArrived(message) {
 		const value_on_table = document.getElementById('temperature_value_bathroom');
 		if (parseFloat(message.payloadString)) {
 			value_on_table.innerHTML = `${message.payloadString}°C`;
-			fetch('http://127.0.0.1:8000/api/log', {
-				method: 'POST',
-				body: JSON.stringify({
-					topic: message.destinationName,
-					value: message.payloadString,
-					date: hoy.getFullYear() + '-' + (hoy.getMonth() + 1) +'-'+ hoy.getDate(),
-					time: hoy.getHours() + ':' + hoy.getMinutes()
-				}),
-				headers: {
-					"Content-type": "application/json"
-				}
-			})
-				.then(response => response)
-				.then(json => console.log(json))
+			
 		} else {
 			value_on_table.innerHTML = message.payloadString;
 		}
@@ -121,20 +81,7 @@ function MessageArrived(message) {
 		const value_on_table = document.getElementById('temperature_value_kitchen');
 		if (parseFloat(message.payloadString)) {
 			value_on_table.innerHTML = `${message.payloadString}°C`;
-			fetch('http://127.0.0.1:8000/api/log', {
-				method: 'POST',
-				body: JSON.stringify({
-					topic: message.destinationName,
-					value: message.payloadString,
-					date: hoy.getFullYear() + '-' + (hoy.getMonth() + 1) +'-'+ hoy.getDate(),
-					time: hoy.getHours() + ':' + hoy.getMinutes()
-				}),
-				headers: {
-					"Content-type": "application/json"
-				}
-			})
-				.then(response => response)
-				.then(json => console.log(json))
+			
 		} else {
 			value_on_table.innerHTML = message.payloadString;
 		}
@@ -144,20 +91,7 @@ function MessageArrived(message) {
 		const value_on_table = document.getElementById('temperature_value_garden');
 		if (parseFloat(message.payloadString)) {
 			value_on_table.innerHTML = `${message.payloadString}°C`;
-			fetch('http://127.0.0.1:8000/api/log', {
-				method: 'POST',
-				body: JSON.stringify({
-					topic: message.destinationName,
-					value: message.payloadString,
-					date: hoy.getFullYear() + '-' + (hoy.getMonth() + 1) +'-'+ hoy.getDate(),
-					time: hoy.getHours() + ':' + hoy.getMinutes()
-				}),
-				headers: {
-					"Content-type": "application/json"
-				}
-			})
-				.then(response => response)
-				.then(json => console.log(json))
+			
 		} else {
 			value_on_table.innerHTML = message.payloadString;
 		}
@@ -167,20 +101,7 @@ function MessageArrived(message) {
 		const value_on_table = document.getElementById('temperature_value_livingroom');
 		if (parseFloat(message.payloadString)) {
 			value_on_table.innerHTML = `${message.payloadString}°C`;
-			fetch('http://127.0.0.1:8000/api/log', {
-				method: 'POST',
-				body: JSON.stringify({
-					topic: message.destinationName,
-					value: message.payloadString,
-					date: hoy.getFullYear() + '-' + (hoy.getMonth() + 1) +'-'+ hoy.getDate(),
-					time: hoy.getHours() + ':' + hoy.getMinutes()
-				}),
-				headers: {
-					"Content-type": "application/json"
-				}
-			})
-				.then(response => response)
-				.then(json => console.log(json))
+			
 		} else {
 			value_on_table.innerHTML = message.payloadString;
 		}

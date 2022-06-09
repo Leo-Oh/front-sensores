@@ -1,5 +1,5 @@
-let socket = io("ws://127.0.0.1:5000")
-const API_URL = "http://127.0.0.1:8000/api/status";
+let socket = io("ws://34.94.79.113:9096/")
+const API_URL = "http://34.94.79.113:9095/api/status";
 
 
 function get_status(topic,socket_to_emit){
