@@ -14,5 +14,5 @@ RUN pip3 install -r requirements.txt
 
 EXPOSE 9096
 
-CMD ["python","main.py"]
+CMD ["python3","main.py"]
 
